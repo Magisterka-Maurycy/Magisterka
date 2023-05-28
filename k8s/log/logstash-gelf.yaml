@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: log-pipeline-config
+data:
+  gelf.conf: |
+   input {
+    gelf {
+      port => 12201
+    }
+   }
+   output {
+    stdout {}
+    elasticsearch {
+      hosts => ["http://elasticsearch:9200"]
+    }
+   }

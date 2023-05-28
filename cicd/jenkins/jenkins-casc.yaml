@@ -1,0 +1,78 @@
+credentials:
+  system:
+    domainCredentials:
+      - credentials:
+          - basicSSHUserPrivateKey:
+              id: "Maurycy_ssh"
+              privateKeySource:
+                directEntry:
+                  privateKey: "${readFile:/run/secrets/github-key}"
+              scope: GLOBAL
+              username: "Maurycy-Krzeminski"
+          - usernamePassword:
+              id: "Quay-Access"
+              password: "${readFile:/run/secrets/quay-key}"
+              scope: GLOBAL
+              username: "${readFile:/run/secrets/quay-username}"
+              usernameSecret: true
+jenkins:
+  numExecutors: 0
+  systemMessage: "Automating Jenkins Setup using Docker and Jenkins Configuration as Code\n\n"
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+       - id: ${JENKINS_ADMIN_ID}
+         password: ${JENKINS_ADMIN_PASSWORD}
+  authorizationStrategy:
+    globalMatrix:
+      permissions:
+        - "USER:Overall/Administer:admin"
+        - "USER:Overall/Read:authenticated"
+  clouds:
+    - docker:
+        containerCap: 10
+        dockerApi:
+          connectTimeout: 60
+          dockerHost:
+            uri: "unix:///var/run/docker.sock"
+          readTimeout: 60
+        exposeDockerHost: true
+        name: "docker"
+        templates:
+          - connector:
+              attach:
+                user: "root"
+            dockerTemplateBase:
+              cpuPeriod: 0
+              cpuQuota: 0
+              environment:
+                - "TESTCONTAINERS_RYUK_DISABLED=true"
+                - "TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal"
+              environmentsString: |-
+                TESTCONTAINERS_RYUK_DISABLED=true
+                TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal
+              image: "jenkins/inbound-agent:latest-jdk17"
+              mounts:
+                - "type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock"
+              mountsString: |-
+                  type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock
+              network: cicd_default
+              user: "root"
+            instanceCapStr: "5"
+            name: "docker-agent-1"
+            pullStrategy: PULL_ALWAYS
+            pullTimeout: 300
+security:
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "acceptFirstConnectionStrategy"
+unclassified:
+  location:
+    url: http://127.0.0.1:8080/
+  locale:
+    systemLocale: en
+    ignoreAcceptLanguage: true
+  timestamper:
+    allPipelines: true
+jobs:
+  - file: ./jobdsl/job.groovy

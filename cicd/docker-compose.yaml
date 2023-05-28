@@ -1,0 +1,44 @@
+version: '3.3'
+services:
+#  TODO: sonarqube link on jenkins does not work due to SONARQUBE_URL on jenkins
+  jenkins:
+    build: ./jenkins/ 
+    container_name: jenkins
+    ports:
+      - "8080:8080"
+    environment:
+      - JENKINS_ADMIN_ID=${JENKINS_ADMIN_ID}
+      - JENKINS_ADMIN_PASSWORD=${JENKINS_ADMIN_PASSWORD}
+      - SONARQUBE_URL=http://sonarqube:9000
+      - QUARKUS_CONTAINER_IMAGE_USERNAME=${QUARKUS_CONTAINER_IMAGE_USERNAME}
+      - QUARKUS_CONTAINER_IMAGE_PASSWORD=${QUARKUS_CONTAINER_IMAGE_PASSWORD}
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    user: root
+    secrets:
+      - github-key
+      - quay-key
+    depends_on:
+      sonarqube:
+        condition: service_healthy
+  sonarqube:
+    image: sonarqube:lts
+    container_name: sonarqube
+    ports:
+      - "9000:9000"
+    environment:
+      - SONAR_FORCEAUTHENTICATION=false
+    healthcheck:
+      test: wget -qO- http://localhost:9000/api/system/status | grep -q '"status":"UP"'
+      interval: 8s
+      timeout: 5s
+      retries: 3
+
+
+secrets:
+  github-key:
+    file: ./secrets/jenkins
+  quay-key:
+    file: ./secrets/quay
+  quay-username:
+    file: ./secrets/quay-usr

@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    io.kompose.service: dsa-minio
+  name: dsa-minio
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: dsa-minio
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        io.kompose.service: dsa-minio
+    spec:
+      containers:
+        - args:
+            - server
+            - /data
+            - --console-address
+            - :9090
+          env:
+            - name: MINIO_ROOT_PASSWORD
+              value: CHANGEME123
+            - name: MINIO_ROOT_USER
+              value: ROOTUSER
+          image: quay.io/minio/minio
+          name: dsa-minio
+          ports:
+            - containerPort: 9000
+            - containerPort: 9090
+          resources: {}
+          volumeMounts:
+            - mountPath: /data
+              name: dsa-minio-claim0
+      restartPolicy: Always
+      volumes:
+        - name: dsa-minio-claim0
+          persistentVolumeClaim:
+            claimName: dsa-minio-claim0

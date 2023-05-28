@@ -1,0 +1,12 @@
+docker-plugin:latest
+git:latest
+configuration-as-code:latest
+matrix-auth:latest
+github-oauth:latest
+pipeline-stage-view:latest
+docker-workflow:latest
+locale:latest
+job-dsl:latest
+timestamper:latest
+sonar:latest
+ssh-agent:latest
