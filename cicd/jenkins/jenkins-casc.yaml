@@ -52,7 +52,7 @@ jenkins:
               environmentsString: |-
                 TESTCONTAINERS_RYUK_DISABLED=true
                 TESTCONTAINERS_HOST_OVERRIDE=host.docker.internal
-              image: "jenkins/inbound-agent:latest-jdk17"
+              image: "quay.io/maurycy_krzeminski/jenkins-inbound:latest"
               mounts:
                 - "type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock"
               mountsString: |-
