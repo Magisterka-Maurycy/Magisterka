@@ -23,3 +23,5 @@ RUN newgrp docker
 # set default user attributes
 ENV JENKINS_UID=1000
 ENV JENKINS_GID=1000
+
+#TODO: Attempted to read Testcontainers configuration file at file:/root/.testcontainers.properties but the file was not found. Exception message: FileNotFoundException: /root/.testcontainers.properties (No such file or directory)

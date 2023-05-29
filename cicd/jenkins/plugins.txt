@@ -13,3 +13,4 @@ ssh-agent:latest
 jenkins-multijob-plugin:latest
 htmlpublisher:latest
 jacoco:latest
+blueocean:latest
