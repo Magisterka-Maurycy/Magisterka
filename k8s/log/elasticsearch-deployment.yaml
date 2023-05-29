@@ -1,9 +1,6 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-    kompose.version: 1.28.0 (c4137012e)
-  creationTimestamp: null
   labels:
     io.kompose.service: elasticsearch
   name: elasticsearch
@@ -15,9 +12,6 @@ spec:
   strategy: {}
   template:
     metadata:
-      annotations:
-        kompose.version: 1.28.0 (c4137012e)
-      creationTimestamp: null
       labels:
         io.kompose.network/log-elk: "true"
         io.kompose.service: elasticsearch
