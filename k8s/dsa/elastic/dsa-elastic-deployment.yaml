@@ -22,6 +22,8 @@ spec:
             - containerPort: 9200
 #            TODO: move to configMap and secrets
           env:
+            - name: ES_JAVA_OPTS
+              value: -Xms512m -Xmx512m
             - name: discovery.type
               value: "single-node"
             - name: ELASTIC_USERNAME
