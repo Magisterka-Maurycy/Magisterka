@@ -18,6 +18,7 @@ services:
     secrets:
       - github-key
       - quay-key
+      - quay-username
     depends_on:
       sonarqube:
         condition: service_healthy
