@@ -2,24 +2,36 @@
 # export K3D_FIX_DNS=1
 $Env:K3D_FIX_DNS=1
 k3d cluster delete newcluster
-k3d cluster create newcluster --api-port 127.0.0.1:6443 -p 80:80@loadbalancer -p 443:443@loadbalancer
+k3d cluster create newcluster --api-port 127.0.0.1:6443 -p 80:80@loadbalancer -p 443:443@loadbalancer --k3s-arg="--disable=traefik@server:0" --volume ./k3dVolume:/k3dVolume
 
+# nginx-ingress install
+helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx --namespace ingress-nginx --create-namespace
+kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.kubernetes.io/component=controller --timeout=120s
+
+#argocd install
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-#helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-#helm repo update
+## Waiting for argocd not needed currently
+#kubectl rollout status deployment/argocd-redis -n argocd
+#kubectl rollout status deployment/argocd-applicationset-controller -n argocd
+#kubectl rollout status deployment/argocd-notifications-controller -n argocd
+#kubectl rollout status deployment/argocd-dex-server -n argocd
+#kubectl rollout status deployment/argocd-repo-server -n argocd
+#kubectl rollout status deployment/argocd-server -n argocd
 
-#kubectl create -f https://raw.githubusercontent.com/keycloak/keycloak-quickstarts/latest/kubernetes-examples/keycloak.yaml
+kubectl apply -f ./argo-ingress.yaml
 
-#helm install --namespace prometheus -f ./prometheus/values.yaml prom-stack prometheus-community/kube-prometheus-stack --create-namespace --wait
+kubectl create namespace prometheus
 
-#kubectl apply -f .\log\
+# Currently mongodb is created with kubectl not argocd
+kubectl apply -f ..\k8s\mba\mongodb\
 
-#kubectl apply -f .\dsa\elastic\
-#kubectl apply -f .\dsa\minio\
+# Repo added to argocd
+kubectl create secret generic private-repo-creds --from-literal=type=git --from-literal=url=git@github.com:Magisterka-Maurycy/GitOps.git --from-file=sshPrivateKey=../cicd/secrets/jenkins --namespace=argocd
+kubectl label secret private-repo-creds --namespace=argocd argocd.argoproj.io/secret-type=repository
 
-#kubectl apply -f .\mba\mongodb\
+kubectl apply -f ./argo
 
-
-#helm repo remove prometheus-community
+# Argocd password:
+# kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
