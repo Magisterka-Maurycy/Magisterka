@@ -9,7 +9,7 @@ pipelineJob('Auth') {
         pipelineTriggers{
             triggers{
                 pollSCM{
-                    scmpoll_spec('H/5 * * * *')
+                    scmpoll_spec('H/20 * * * *')
                 }
             }
         }
@@ -38,7 +38,7 @@ pipelineJob('DSA') {
         pipelineTriggers{
             triggers{
                 pollSCM{
-                    scmpoll_spec('H/5 * * * *')
+                    scmpoll_spec('H/20 * * * *')
                 }
             }
         }
@@ -67,7 +67,7 @@ pipelineJob('Math') {
         pipelineTriggers{
             triggers{
                 pollSCM{
-                    scmpoll_spec('H/5 * * * *')
+                    scmpoll_spec('H/20 * * * *')
                 }
             }
         }
@@ -96,7 +96,7 @@ pipelineJob('MBA') {
         pipelineTriggers{
             triggers{
                 pollSCM{
-                    scmpoll_spec('H/5 * * * *')
+                    scmpoll_spec('H/20 * * * *')
                 }
             }
         }
