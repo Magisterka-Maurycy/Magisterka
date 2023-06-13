@@ -24,10 +24,10 @@ kubectl apply -f .\mba\mongodb\
 
 
 ../gradlew.bat clean -p ../
-../auth/gradlew.bat build -p ../auth -D'quarkus.profile'=kub-dep
-../dsa/gradlew.bat  build -p ../dsa  -D'quarkus.profile'=kub-dep
-../math/gradlew.bat build -p ../math -D'quarkus.profile'=kub-dep
-../mba/gradlew.bat  build -p ../mba  -D'quarkus.profile'=kub-dep
+../auth/gradlew.bat build -p ../auth -D'quarkus.profile'=dep-kub
+../dsa/gradlew.bat  build -p ../dsa  -D'quarkus.profile'=dep-kub
+../math/gradlew.bat build -p ../math -D'quarkus.profile'=dep-kub
+../mba/gradlew.bat  build -p ../mba  -D'quarkus.profile'=dep-kub
 
 kubectl autoscale deployment auth --cpu-percent=50 --min=1 --max=3
 kubectl autoscale deployment dsa  --cpu-percent=50 --min=1 --max=3
