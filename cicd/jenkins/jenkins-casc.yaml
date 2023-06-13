@@ -59,7 +59,7 @@ jenkins:
                   type=bind,source=/var/run/docker.sock,destination=/var/run/docker.sock
               network: cicd_default
               user: "root"
-            instanceCapStr: "5"
+            instanceCapStr: "1"
             name: "docker-agent-1"
             pullStrategy: PULL_ALWAYS
             pullTimeout: 300
