@@ -6,16 +6,10 @@ def mba_repo = 'git@github.com:Magisterka-Maurycy/mba.git'
 pipelineJob('Auth') {
     properties {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/auth')
-        pipelineTriggers{
-            triggers{
-                pollSCM{
-                    scmpoll_spec('H/20 * * * *')
-                }
-            }
-        }
     }
     parameters{
         booleanParam('DEPLOY', false)
+        booleanParam('OWASP', false)
     }
     definition {
         cpsScm {
@@ -35,16 +29,10 @@ pipelineJob('Auth') {
 pipelineJob('DSA') {
     properties {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/dsa')
-        pipelineTriggers{
-            triggers{
-                pollSCM{
-                    scmpoll_spec('H/20 * * * *')
-                }
-            }
-        }
     }
     parameters{
         booleanParam('DEPLOY', false)
+        booleanParam('OWASP', false)
     }
     definition {
         cpsScm {
@@ -64,16 +52,10 @@ pipelineJob('DSA') {
 pipelineJob('Math') {
     properties {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/math')
-        pipelineTriggers{
-            triggers{
-                pollSCM{
-                    scmpoll_spec('H/20 * * * *')
-                }
-            }
-        }
     }
     parameters{
         booleanParam('DEPLOY', false)
+        booleanParam('OWASP', false)
     }
     definition {
         cpsScm {
@@ -93,16 +75,10 @@ pipelineJob('Math') {
 pipelineJob('MBA') {
     properties {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/mba')
-        pipelineTriggers{
-            triggers{
-                pollSCM{
-                    scmpoll_spec('H/20 * * * *')
-                }
-            }
-        }
     }
     parameters{
         booleanParam('DEPLOY', false)
+        booleanParam('OWASP', false)
     }
     definition {
         cpsScm {
