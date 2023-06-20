@@ -15,6 +15,7 @@ services:
     user: root
     secrets:
       - github-key
+      - github-key-release
       - quay-key
       - quay-username
     depends_on:
@@ -37,6 +38,8 @@ services:
 secrets:
   github-key:
     file: ./secrets/jenkins
+  github-key-release:
+    file: ./secrets/ssh
   quay-key:
     file: ./secrets/quay
   quay-username:

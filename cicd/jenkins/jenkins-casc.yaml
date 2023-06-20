@@ -9,6 +9,13 @@ credentials:
                   privateKey: "${readFile:/run/secrets/github-key}"
               scope: GLOBAL
               username: "Maurycy-Krzeminski"
+          - basicSSHUserPrivateKey:
+              id: "Release_ssh"
+              privateKeySource:
+                directEntry:
+                  privateKey: "${readFile:/run/secrets/github-key-release}"
+              scope: GLOBAL
+              username: "Maurycy-Krzeminski"
           - usernamePassword:
               id: "Quay-Access"
               password: "${readFile:/run/secrets/quay-key}"

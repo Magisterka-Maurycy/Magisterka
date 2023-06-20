@@ -7,7 +7,7 @@ pipelineJob('Auth') {
     properties {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/auth')
     }
-    parameters{
+    parameters {
         booleanParam('DEPLOY', false)
         booleanParam('OWASP', false)
     }
@@ -16,11 +16,13 @@ pipelineJob('Auth') {
             scm {
                 git {
                     remote {
-                        credentials("Maurycy_ssh")
+                        credentials('Maurycy_ssh')
                         url(auth_repo)
                     }
+                    extensions {
+                        localBranch('develop')
+                    }
                 }
-
             }
         }
     }
@@ -30,7 +32,7 @@ pipelineJob('DSA') {
     properties {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/dsa')
     }
-    parameters{
+    parameters {
         booleanParam('DEPLOY', false)
         booleanParam('OWASP', false)
     }
@@ -39,11 +41,13 @@ pipelineJob('DSA') {
             scm {
                 git {
                     remote {
-                        credentials("Maurycy_ssh")
+                        credentials('Maurycy_ssh')
                         url(dsa_repo)
                     }
+                    extensions {
+                        localBranch('develop')
+                    }
                 }
-
             }
         }
     }
@@ -53,7 +57,7 @@ pipelineJob('Math') {
     properties {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/math')
     }
-    parameters{
+    parameters {
         booleanParam('DEPLOY', false)
         booleanParam('OWASP', false)
     }
@@ -62,11 +66,13 @@ pipelineJob('Math') {
             scm {
                 git {
                     remote {
-                        credentials("Maurycy_ssh")
+                        credentials('Maurycy_ssh')
                         url(math_repo)
                     }
+                    extensions {
+                        localBranch('develop')
+                    }
                 }
-
             }
         }
     }
@@ -76,7 +82,7 @@ pipelineJob('MBA') {
     properties {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/mba')
     }
-    parameters{
+    parameters {
         booleanParam('DEPLOY', false)
         booleanParam('OWASP', false)
     }
@@ -85,11 +91,13 @@ pipelineJob('MBA') {
             scm {
                 git {
                     remote {
-                        credentials("Maurycy_ssh")
+                        credentials('Maurycy_ssh')
                         url(mba_repo)
                     }
+                    extensions {
+                        localBranch('develop')
+                    }
                 }
-
             }
         }
     }
@@ -97,16 +105,16 @@ pipelineJob('MBA') {
 
 multiJob('ALL') {
     steps {
-        phase('Auth'){
+        phase('Auth') {
             phaseJob('Auth')
         }
-        phase('DSA'){
+        phase('DSA') {
             phaseJob('DSA')
         }
-        phase('Math'){
+        phase('Math') {
             phaseJob('Math')
         }
-        phase('MBA'){
+        phase('MBA') {
             phaseJob('MBA')
         }
     }
