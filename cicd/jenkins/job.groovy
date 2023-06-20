@@ -20,7 +20,7 @@ pipelineJob('Auth') {
                         url(auth_repo)
                     }
                     extensions {
-                        localBranch('develop')
+                        localBranch('master')
                     }
                 }
             }
@@ -45,7 +45,7 @@ pipelineJob('DSA') {
                         url(dsa_repo)
                     }
                     extensions {
-                        localBranch('develop')
+                        localBranch('master')
                     }
                 }
             }
@@ -70,7 +70,7 @@ pipelineJob('Math') {
                         url(math_repo)
                     }
                     extensions {
-                        localBranch('develop')
+                        localBranch('master')
                     }
                 }
             }
@@ -95,7 +95,7 @@ pipelineJob('MBA') {
                         url(mba_repo)
                     }
                     extensions {
-                        localBranch('develop')
+                        localBranch('master')
                     }
                 }
             }
