@@ -8,7 +8,7 @@ pipelineJob('Auth') {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/auth')
     }
     parameters {
-        booleanParam('DEPLOY', false)
+        booleanParam('RELEASE', false)
         booleanParam('OWASP', false)
     }
     definition {
@@ -33,7 +33,7 @@ pipelineJob('DSA') {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/dsa')
     }
     parameters {
-        booleanParam('DEPLOY', false)
+        booleanParam('RELEASE', false)
         booleanParam('OWASP', false)
     }
     definition {
@@ -58,7 +58,7 @@ pipelineJob('Math') {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/math')
     }
     parameters {
-        booleanParam('DEPLOY', false)
+        booleanParam('RELEASE', false)
         booleanParam('OWASP', false)
     }
     definition {
@@ -83,7 +83,7 @@ pipelineJob('MBA') {
         githubProjectUrl('https://github.com/Magisterka-Maurycy/mba')
     }
     parameters {
-        booleanParam('DEPLOY', false)
+        booleanParam('RELEASE', false)
         booleanParam('OWASP', false)
     }
     definition {
