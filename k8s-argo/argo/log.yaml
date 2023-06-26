@@ -11,7 +11,7 @@ spec:
   source:
     path: kubernetes/log
     repoURL: 'git@github.com:Magisterka-Maurycy/GitOps.git'
-    targetRevision: HEAD
+    targetRevision: 0.1.1
   sources: []
   project: default
   syncPolicy:

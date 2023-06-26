@@ -17,7 +17,7 @@ spec:
         valueFiles:
           - $values/kubernetes/prometheus/values.yaml
     - repoURL: 'git@github.com:Magisterka-Maurycy/GitOps.git'
-      targetRevision: HEAD
+      targetRevision: 0.1.1
       ref: values
   syncPolicy:
     automated: { }
