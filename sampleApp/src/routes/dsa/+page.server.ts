@@ -1,5 +1,5 @@
 import { dsaUrl } from '$lib/server/urls';
-import type { Actions, RequestEvent } from './$types';
+import type { Actions } from './$types';
 import type { Load } from "@sveltejs/kit"
 
 
@@ -7,7 +7,6 @@ import type { Load } from "@sveltejs/kit"
 export const load: Load = (async (event) => {
 	const res = await event.fetch('/api/dsa');
 	const names: string[] = await res.json();
-	console.log(names)
 	return {
 		names
 	};
@@ -25,9 +24,7 @@ export const actions: Actions = {
 		const bearer = 'Bearer ' + accessToken;
 
 		const formData = await request.formData()
-		
-		console.log(formData)
-		console.log(formData)
+
 		const options = {
 			method: 'POST',
 			headers: {
@@ -35,13 +32,12 @@ export const actions: Actions = {
 			},
 			body: formData
 		}
-		console.log(options)
-		
+
 		const response = await fetch(dsaUrl, options);
+		if (response.status == 201) {
+			return { success: true };
+		}
+		return { success: false }
 
-		console.log(response.status)
-
-
-		return { success: true };
 	}
 }

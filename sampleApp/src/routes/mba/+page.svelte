@@ -10,12 +10,6 @@
 	async function run() {
 		const res = await fetch('/api/mba/data');
 		data = await res.json();
-
-		if (data != undefined) {
-			data.forEach((element) => {
-				console.log(element.data);
-			});
-		}
 	}
 	onMount(async () => {
 		await run();

@@ -1,7 +1,16 @@
 <script lang="ts">
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
+	
+	export let form: ActionData;
+	$: if (form?.success) {
+		open = true
+	}
+	let open = false;
+	let dialog: HTMLDialogElement;
+	$: if (dialog && open) dialog.showModal();
+	$: if (dialog && !open) dialog.close();
 	let files: any;
 </script>
 
@@ -17,10 +26,11 @@
 					const options = {
 						method: 'DELETE'
 					};
-					const res = await fetch('/api/dsa/' + name, options);
-					console.log(res);
-					//TODO: better reload on client side after deleting element
-					location.reload();
+					await fetch('/api/dsa/' + name, options);
+
+					setTimeout(()=>{
+						location.reload();
+					},500)
 				}}>Delete</button
 			>
 		</p>
@@ -33,3 +43,10 @@
 	<input type="file" name="files" bind:files />
 	<button>submit</button>
 </form>
+
+<dialog bind:this={dialog} on:close={() => (open = false)} on:click|self={() => {
+	dialog.close()
+	location.reload()
+}}>
+	Data uploaded
+</dialog>
