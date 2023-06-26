@@ -21,7 +21,6 @@ credentials:
               password: "${readFile:/run/secrets/quay-key}"
               scope: GLOBAL
               username: "${readFile:/run/secrets/quay-username}"
-              usernameSecret: true
 jenkins:
   numExecutors: 0
   systemMessage: "Automating Jenkins Setup using Docker and Jenkins Configuration as Code\n\n"
