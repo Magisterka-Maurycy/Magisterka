@@ -1,0 +1,12 @@
+version: '3.5'
+
+services:
+  mba:
+    image: quay.io/maurycy_krzeminski/mba:0.1.1
+    ports:
+      - "8080:8080"
+    environment:
+      QUARKUS_LOG_HANDLER_GELF_ENABLED: false
+      DISABLE_AUTHORIZATION: "true"
+  mongodb:
+    image: mongo
