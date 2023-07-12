@@ -6,14 +6,6 @@ kubectl wait --namespace ingress-nginx --for=condition=ready pod --selector=app.
 kubectl create namespace argocd
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-## Waiting for argocd not needed currently
-#kubectl rollout status deployment/argocd-redis -n argocd
-#kubectl rollout status deployment/argocd-applicationset-controller -n argocd
-#kubectl rollout status deployment/argocd-notifications-controller -n argocd
-#kubectl rollout status deployment/argocd-dex-server -n argocd
-#kubectl rollout status deployment/argocd-repo-server -n argocd
-#kubectl rollout status deployment/argocd-server -n argocd
-
 kubectl apply -f ./argo-ingress.yaml
 
 kubectl create namespace prometheus
@@ -27,5 +19,3 @@ kubectl label secret private-repo-creds --namespace=argocd argocd.argoproj.io/se
 
 kubectl apply -f ./argo
 
-# Argocd password:
-# kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
