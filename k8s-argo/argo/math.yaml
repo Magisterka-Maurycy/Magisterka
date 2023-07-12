@@ -11,7 +11,7 @@ spec:
   source:
     path: kubernetes/math
     repoURL: 'git@github.com:Magisterka-Maurycy/GitOps.git'
-    targetRevision: 0.1.1
+    targetRevision: 0.1.3
   sources: []
   project: default
   syncPolicy:
