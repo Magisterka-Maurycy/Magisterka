@@ -4,7 +4,13 @@ import type { Actions } from './$types';
 
 type MbaData = {
 	id: string
-	data: any
+	type?: string
+	dataStorage: any
+}
+
+type MbaDataUpdate = {
+	type?: string
+	dataStorage: any
 }
 
 export const actions = {
@@ -32,8 +38,8 @@ export const actions = {
 			i = i + 1;
 		}
 
-		const data = Object.fromEntries(dataMap)
-		const mbaData: MbaData = { id, data }
+		const dataStorage = Object.fromEntries(dataMap)
+		const mbaData: MbaData = { id, dataStorage }
 		const bodyString = JSON.stringify(mbaData)
 		const accessToken = cookies.get("access_token")
 		const bearer = 'Bearer ' + accessToken;
@@ -78,7 +84,7 @@ export const actions = {
 		}
 
 		const data = Object.fromEntries(dataMap)
-		const mbaData: MbaData = { id, data }
+		const mbaData: MbaDataUpdate = { id, data }
 		const bodyString = JSON.stringify(mbaData)
 		const accessToken = cookies.get("access_token")
 		const bearer = 'Bearer ' + accessToken;

@@ -3,7 +3,7 @@
 
 	type MBAData = {
 		id: string;
-		data: any;
+		dataStorage: any[];
 	};
 
 	let data: MBAData[] | undefined = undefined;
@@ -70,7 +70,7 @@
 				id:
 				<input name="id" bind:value={element.id} readonly/>
 			</label><br/>
-			{#each Object.entries(element.data) as value, id}
+			{#each Object.entries(element.dataStorage) as value, id}
 				<label
 					>key
 					<input name="key{id}" value={value[0]} />
@@ -80,8 +80,9 @@
 					<input name="value{id}" value={value[1]} />
 				</label><br/>
 			{/each}
-			<button>Update</button>
-			<button formaction="?/delete">Delete</button>
+			
+			<button >Update</button>
+			<button  formaction="?/delete">Delete</button>
 		</form>
 	{/each}
 {/if}
