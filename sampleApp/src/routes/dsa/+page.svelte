@@ -2,10 +2,10 @@
 	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
-	
+
 	export let form: ActionData;
 	$: if (form?.success) {
-		open = true
+		open = true;
 	}
 	let open = false;
 	let dialog: HTMLDialogElement;
@@ -18,23 +18,24 @@
 
 <p>Stored files:</p>
 <div>
-	{#each data.names as name}
-		<p>
-			<a rel="external" href="/api/dsa/{name}">{name}</a>
-			<button
-				on:click={async () => {
-					const options = {
-						method: 'DELETE'
-					};
-					await fetch('/api/dsa/' + name, options);
-
-					setTimeout(()=>{
-						location.reload();
-					},500)
-				}}>Delete</button
-			>
-		</p>
-	{/each}
+	{#if data.names != undefined}
+		{#each data.names as name}
+			<p>
+				<a rel="external" href="/api/dsa/{name}">{name}</a>
+				<button
+					on:click={async () => {
+						const options = {
+							method: 'DELETE'
+						};
+						await fetch('/api/dsa/' + name, options);
+						setTimeout(() => {
+							location.reload();
+						}, 500);
+					}}>Delete</button
+				>
+			</p>
+		{/each}
+	{/if}
 </div>
 <br />
 <br />
@@ -44,9 +45,13 @@
 	<button>submit</button>
 </form>
 
-<dialog bind:this={dialog} on:close={() => (open = false)} on:click|self={() => {
-	dialog.close()
-	location.reload()
-}}>
+<dialog
+	bind:this={dialog}
+	on:close={() => (open = false)}
+	on:click|self={() => {
+		dialog.close();
+		location.reload();
+	}}
+>
 	Data uploaded
 </dialog>
