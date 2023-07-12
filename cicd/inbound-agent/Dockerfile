@@ -4,9 +4,6 @@ USER root
 RUN groupadd docker
 RUN usermod -aG docker jenkins
 
-RUN touch /var/run/docker.sock
-RUN chmod 777 /var/run/docker.sock
-
 RUN apt-get update \
     && apt-get install -qqy apt-transport-https ca-certificates curl gnupg2 software-properties-common
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
