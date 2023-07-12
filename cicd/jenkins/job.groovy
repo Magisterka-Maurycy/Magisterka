@@ -103,19 +103,3 @@ pipelineJob('MBA') {
     }
 }
 
-multiJob('ALL') {
-    steps {
-        phase('Auth') {
-            phaseJob('Auth')
-        }
-        phase('DSA') {
-            phaseJob('DSA')
-        }
-        phase('Math') {
-            phaseJob('Math')
-        }
-        phase('MBA') {
-            phaseJob('MBA')
-        }
-    }
-}
