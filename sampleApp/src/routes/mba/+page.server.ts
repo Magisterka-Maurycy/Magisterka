@@ -83,8 +83,8 @@ export const actions = {
 			i = i + 1;
 		}
 
-		const data = Object.fromEntries(dataMap)
-		const mbaData: MbaDataUpdate = { id, data }
+		const dataStorage = Object.fromEntries(dataMap)
+		const mbaData: MbaDataUpdate = { dataStorage }
 		const bodyString = JSON.stringify(mbaData)
 		const accessToken = cookies.get("access_token")
 		const bearer = 'Bearer ' + accessToken;
