@@ -12,5 +12,9 @@ RUN /opt/keycloak/bin/kc.sh import --file=/opt/keycloak/data/import/realm.json
 
 ENV KEYCLOAK_ADMIN=admin
 ENV KEYCLOAK_ADMIN_PASSWORD=admin
+#TODO: fix certs and disable http
+ENV KC_HTTP_ENABLED=true
+ENV KC_HOSTNAME_STRICT=false
+RUN /opt/keycloak/bin/kc.sh build
 
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start-dev"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start", "--optimized"]
