@@ -10,6 +10,8 @@ COPY --from=ubi-micro-build /mnt/rootfs /
 ADD ./realm.json /opt/keycloak/data/import/realm.json
 RUN /opt/keycloak/bin/kc.sh import --file=/opt/keycloak/data/import/realm.json
 
+ENV KC_HEALTH_ENABLED=true
+ENV KC_METRICS_ENABLED=true
 ENV KEYCLOAK_ADMIN=admin
 ENV KEYCLOAK_ADMIN_PASSWORD=admin
 #TODO: fix certs and disable http
