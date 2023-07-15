@@ -10,8 +10,6 @@ kubectl apply -f ./argo-ingress.yaml
 
 kubectl create namespace prometheus
 
-# Currently mongodb is created with kubectl not argocd
-kubectl apply -f ..\k8s\mba\mongodb\
 
 # Repo added to argocd
 kubectl create secret generic private-repo-creds --from-literal=type=git --from-literal=url=git@github.com:Magisterka-Maurycy/GitOps.git --from-file=sshPrivateKey=../cicd/secrets/jenkins --namespace=argocd
