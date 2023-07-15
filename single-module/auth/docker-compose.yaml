@@ -9,9 +9,6 @@ services:
       QUARKUS_LOG_HANDLER_GELF_ENABLED: false
       QUARKUS_OIDC_AUTH_SERVER_URL: "http://keycloak:8080/realms/quarkus"
       QUARKUS_OIDC_TOKEN_ISSUER: "http://keycloak:8080/realms/quarkus"
-    depends_on:
-     keycloak:
-        condition: service_healthy
   keycloak:
     image: quay.io/maurycy_krzeminski/keycloak
     ports:
@@ -20,8 +17,9 @@ services:
       - KEYCLOAK_ADMIN=admin
       - KEYCLOAK_ADMIN_PASSWORD=admin
       - KC_PROXY=edge
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8080/realms/master"]
-      interval: 5s
-      timeout: 2s
-      retries: 15
+        
+  smtp:
+     image: mailhog/mailhog
+     ports:
+     - "8082:8025"
+
