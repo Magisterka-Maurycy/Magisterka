@@ -18,5 +18,5 @@
 >
 
 <dialog bind:this={dialog} on:close={() => (open = false)} on:click|self={() => dialog.close()}>
-	user loged out
+	user logged out
 </dialog>
